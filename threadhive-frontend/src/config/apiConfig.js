@@ -14,6 +14,7 @@ export const THREAD_API = {
   CREATE: '/threads',
   UPVOTE: (id) => `/threads/${id}/upvote`,
   DOWNVOTE: (id) => `/threads/${id}/downvote`,
+  SUMMARY: (id) => `/threads/${id}/summary`,
 };
 
 // Comment API Endpoints
@@ -36,4 +37,9 @@ export const SUBREDDIT_API = {
 export const USER_API = {
   GET_BY_ID: (id) => `/users/${id}`,
   GET_PROFILE: '/users/profile',
+};
+
+// AI API Endpoints
+export const AI_API = {
+  REPHRASE: '/ai/rephrase',
 };

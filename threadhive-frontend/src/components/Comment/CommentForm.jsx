@@ -1,7 +1,8 @@
 import { Card, Form, Button } from "react-bootstrap";
+import RephraseWithAI from "../Rephrase/RephraseWithAI";
 import './CommentForm.css';
 
-export default function CommentForm({ commentText, onCommentChange, onPostComment, disabled }) {
+export default function CommentForm({ commentText, onCommentChange, onPostComment, disabled, onCommentReplace }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onPostComment) {
@@ -25,6 +26,11 @@ export default function CommentForm({ commentText, onCommentChange, onPostCommen
               className="comment-textarea"
             />
           </Form.Group>
+          {onCommentReplace && (
+            <div className="mb-3">
+              <RephraseWithAI field="comment" text={commentText} onAccept={onCommentReplace} />
+            </div>
+          )}
           <Button 
             variant="primary" 
             type="submit" 

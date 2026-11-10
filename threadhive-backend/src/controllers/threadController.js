@@ -4,6 +4,7 @@ import {
   createNewThread,
   updateThreadById,
   deleteThreadById,
+  summarizeThread,
 } from "../services/threadService.js";
 import { createAppError } from "../utils/createAppError.js";
 
@@ -67,5 +68,15 @@ export const deleteThread = async (req, res) => {
     success: true,
     message: "Thread deleted successfully",
     data: deletedThread,
+  });
+};
+
+// POST /api/threads/:id/summary
+export const summarizeThreadByID = async (req, res) => {
+  const data = await summarizeThread(req.params.id);
+  res.status(200).json({
+    success: true,
+    message: "Thread summarized successfully",
+    data,
   });
 };
