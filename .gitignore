@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
