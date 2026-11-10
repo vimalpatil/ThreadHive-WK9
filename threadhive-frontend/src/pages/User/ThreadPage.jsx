@@ -12,6 +12,7 @@ import {
 } from "../../reducers/commentSlice.js";
 
 import ThreadCard from "../../components/ThreadList/ThreadCard";
+import ThreadSummary from "../../components/Thread/ThreadSummary";
 import CommentForm from "../../components/Comment/CommentForm";
 import CommentList from "../../components/Comment/CommentList";
 import { Container, Card, Button, Spinner, Alert } from "react-bootstrap";
@@ -94,11 +95,14 @@ export default function Thread() {
         <ThreadCard thread={thread} goBack={() => navigate(-1)} />
       </div>
 
+      <ThreadSummary threadId={threadId} />
+
       {/* Post Comment Input */}
       <CommentForm
         commentText={commentText}
         onCommentChange={(e) => setCommentText(e.target.value)}
         onPostComment={handlePostComment}
+        onCommentReplace={setCommentText}
         disabled={!commentText.trim()}
       />
 

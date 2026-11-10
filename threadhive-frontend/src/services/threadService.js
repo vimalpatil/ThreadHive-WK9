@@ -40,3 +40,12 @@ export const downvoteThread = async (threadId) => {
   });
   return res.data.data;
 };
+
+export const summarizeThread = async (threadId) => {
+  const res = await axiosInstance.post(
+    THREAD_API.SUMMARY(threadId),
+    {},
+    { headers: getAuthHeaders() },
+  );
+  return res.data.data.summary;
+};

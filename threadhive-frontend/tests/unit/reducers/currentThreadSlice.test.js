@@ -13,6 +13,9 @@ describe("currentThreadSlice", () => {
     thread: null,
     loading: false,
     error: null,
+    summary: null,
+    summaryLoading: false,
+    summaryError: null,
   };
 
   describe("initial state", () => {

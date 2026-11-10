@@ -6,6 +6,7 @@ import {
   createSubreddit as createSubredditThunk,
 } from "../../reducers/subredditSlice";
 import { Form } from "react-bootstrap";
+import RephraseWithAI from "../Rephrase/RephraseWithAI";
 import "./CreateThreadForm.css";
 
 export default function CreateThreadForm({ onClose }) {
@@ -100,6 +101,7 @@ export default function CreateThreadForm({ onClose }) {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
+          <RephraseWithAI field="title" text={title} onAccept={setTitle} />
         </div>
 
         {/* Content */}
@@ -113,6 +115,7 @@ export default function CreateThreadForm({ onClose }) {
             onChange={(e) => setContent(e.target.value)}
             required
           />
+          <RephraseWithAI field="content" text={content} onAccept={setContent} />
         </div>
 
         {/* Subreddit Selection */}

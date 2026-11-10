@@ -7,9 +7,18 @@ import {
   mockAuthResponse,
 } from './mockData';
 
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'http://localhost:3000/api';
 
 export const handlers = [
+  http.post(`${BASE_URL}/ai/rephrase`, async ({ request }) => {
+    const { text } = await request.json();
+    return HttpResponse.json({ data: { rephrased: `Improved: ${text}` } });
+  }),
+
+  http.post(`${BASE_URL}/threads/:id/summary`, () =>
+    HttpResponse.json({ data: { summary: 'Mock AI summary paragraph.' } })
+  ),
+
   // Auth endpoints
   http.post(`${BASE_URL}/auth/login`, async ({ request }) => {
     const body = await request.json();

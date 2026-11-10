@@ -34,7 +34,7 @@ Layering is strict: **routes → controllers → services → models**.
 - Services contain all Mongoose queries/business logic.
 - Errors: throw `createAppError(message, statusCode)` from `src/utils/createAppError.js`. There are no try/catch blocks in handlers — Express 5 forwards rejected async handlers to `middleware/errorHandler.js`, which emits `{ success: false, message }` (plus `stack` in development).
 - Votes live in `routes/votes.js` mounted at `/api` (`/api/threads/:id/upvote`, `/api/comments/:id/downvote`, etc.). Vote state is tracked via `upvotedBy`/`downvotedBy` arrays plus a denormalized `voteCount` on Thread and Comment.
-
+ i
 Tests (`vitest.config.js`: node env, `fileParallelism: false`, 60s timeouts):
 - `tests/unit/` mock the layer below with `vi.mock` (controllers mock services, etc.).
 - `tests/integration/` import `../setup.js` explicitly, which starts `mongodb-memory-server` and connects mongoose; they register/login a real user via supertest to get a JWT. They rely on `JWT_SECRET` from `.env`.

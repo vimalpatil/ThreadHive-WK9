@@ -2,6 +2,8 @@ import Thread from "../models/Thread.js";
 import User from "../models/User.js";
 import Subreddit from "../models/Subreddit.js";
 import { createAppError } from "../utils/createAppError.js";
+import { getCommentsByThread } from "./commentService.js";
+import { generateSummary } from "./geminiService.js";
 
 export const fetchAllThreads = async () => {
   const threads = await Thread.find()
@@ -60,4 +62,24 @@ export const deleteThreadById = async (id) => {
   }
 
   return deletedThread;
+};
+const MAX_PROMPT_CHARS = 20000;
+
+export const summarizeThread = async (id) => {
+  const thread = await fetchThreadById(id);
+  const comments = await getCommentsByThread(id);
+
+  const commentLines = comments.map(
+    (c, i) => `${i + 1}. ${c.user?.name || "Unknown"}: ${c.content}`
+  );
+  const text = [
+    `Thread title: ${thread.title}`,
+    `Thread content: ${thread.content}`,
+    commentLines.length ? `Comments:\n${commentLines.join("\n")}` : "Comments: (none)",
+  ]
+    .join("\n\n")
+    .slice(0, MAX_PROMPT_CHARS);
+
+  const summary = await generateSummary(text);
+  return { summary };
 };
